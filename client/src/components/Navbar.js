@@ -14,29 +14,29 @@ export default function Navbar() {
       shape="roundedBottom"
     >
 
-    <NavLink to="/signin">
+    <NavLink to="/signin" activeClassName="active" >
        <Text size = "xl" color="white">
          Sign In
        </Text>
     </NavLink>
 
-    <NavLink to="/">
+    <NavLink exact to="/" activeClassName="active" >
     <Box display="flex" alignItems="center">
-      <Box margin={20} height={50} width={50}>
+      <Box margin={2} height={50} width={50}>
         <Image
-          alt="Brandname Logo"
+          alt="Logo"
           naturalHeight={1}
           naturalWidth={1}
-          src="../logo.svg"
+          src="../../public/icons/logo.svg"
         />
        </Box> 
        <Heading size = "xs" color="orange">
-         BrewHaha
+         BrandName
        </Heading>
       </Box>
     </NavLink>
 
-    <NavLink to="/signup">
+    <NavLink to="/signup" activeClassName="active" >
        <Text size = "xl" color="white">
          Sign Up
        </Text>

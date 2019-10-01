@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import serviceWorker from "./serviceWorker";
+import './index.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import 'gestalt/dist/gestalt.css'
 
