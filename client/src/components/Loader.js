@@ -1,5 +1,5 @@
 import React from 'react';
-import { PacmanLoader } from 'react-spinners';
+import { GridLoader } from 'react-spinners';
 import {Box} from 'gestalt';
 
 const Loader = ({show}) => (
@@ -14,7 +14,7 @@ const Loader = ({show}) => (
                 }
            
             }}>
-            <PacmanLoader size={25} margin="5px" color="darkorange" />
+            <GridLoader size={25} margin="5px" color="darkorange" />
         </Box>
 
    

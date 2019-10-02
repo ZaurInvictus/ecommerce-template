@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Container,Icon, SearchField, Text, Box, Heading, Card, Image, Spinner} from 'gestalt';
+import { Container, Icon, SearchField, Text, Box, Heading, Card, Image } from 'gestalt';
 import '../index.css';
 import Strapi from 'strapi-sdk-javascript/build/main'; 
 import { Link } from "react-router-dom";
@@ -68,6 +68,7 @@ class App extends Component {
             id="searchField"
             accessibilityLabel="Brands Search Field"
             onChange={this.handleChange}
+            value={searchTerm} // to use state as a single source of truth
             placeholder="Search Brands"
             
           />
