@@ -6,7 +6,7 @@
       "settings": {
         "client": "mongo",
         "host": "cluster0-ig21i.mongodb.net",
-        "port": " ",
+        "port": "27017",
         "database": "server",
         "username": "Zaur",
         "password": "Z63216321z",
