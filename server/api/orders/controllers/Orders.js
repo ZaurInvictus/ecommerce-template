@@ -1,0 +1,116 @@
+'use strict';
+// IMPORTING STRIPE
+// STRIPE SECRET KEY
+const stripe = require('stripe')('sk_test_g3Yx7LAUB9QqFuSy1Xk4m9z1')
+
+/**
+ * Orders.js controller
+ *
+ * @description: A set of functions called "actions" for managing `Orders`.
+ */
+
+module.exports = {
+
+  /**
+   * Retrieve orders records.
+   *
+   * @return {Object|Array}
+   */
+
+  find: async (ctx, next, { populate } = {}) => {
+    if (ctx.query._q) {
+      return strapi.services.orders.search(ctx.query);
+    } else {
+      return strapi.services.orders.fetchAll(ctx.query, populate);
+    }
+  },
+
+  /**
+   * Retrieve a orders record.
+   *
+   * @return {Object}
+   */
+
+  findOne: async (ctx) => {
+    if (!ctx.params._id.match(/^[0-9a-fA-F]{24}$/)) {
+      return ctx.notFound();
+    }
+
+    return strapi.services.orders.fetch(ctx.params);
+  },
+
+  /**
+   * Count orders records.
+   *
+   * @return {Number}
+   */
+
+  count: async (ctx) => {
+    return strapi.services.orders.count(ctx.query);
+  },
+
+  /**
+   * Create a/an orders record.
+   *
+   * @return {Object}
+   */
+
+////////////////////// DATA MODIFIED BY ME /////////////////////////////////////
+
+  // DELETE DATA IN IT AND WRITE CUSTOM LOGIC
+  // See Stripe Docs for details
+  create: async (ctx) => {
+    
+    const {
+      address,
+      amount,
+      brews,
+      postalCode,
+      token,
+      city
+    } = ctx.request.body;
+
+    
+    // Send charge to stripe
+    const charge = await stripe.charges.create({
+      amount: amount * 100,
+      currency: 'usd',
+      description: `Order ${new Date(Date.now())} - User ${ctx.state.user._id}`,
+      source: token
+    })
+
+    // Create order in database
+     const order = await strapi.services.orders.add({
+       user: ctx.state.user._id,
+       address, 
+       amount,
+       brews, 
+       postalCode,
+       city
+     })
+
+     return order
+  },
+
+///////////////////////////////////////////////////////////////
+
+  /**
+   * Update a/an orders record.
+   *
+   * @return {Object}
+   */
+
+  update: async (ctx, next) => {
+    return strapi.services.orders.edit(ctx.params, ctx.request.body) ;
+  },
+
+  /**
+   * Destroy a/an orders record.
+   *
+   * @return {Object}
+   */
+
+  destroy: async (ctx, next) => {
+    return strapi.services.orders.remove(ctx.params);
+  }
+};

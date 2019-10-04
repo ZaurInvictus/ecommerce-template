@@ -32,11 +32,12 @@ class App extends Component {
          }`
         }   
      })
+     console.log('RESPONSE from Did Mount:', response)
      this.setState({
        brands: response.data.brands, loadingBrands: false
      })
     }catch(err){
-      console.log(err)
+      console.log('ERROR:', err)
       this.setState({
         loadingBrands: false
       })
@@ -49,6 +50,9 @@ class App extends Component {
   }
 
   filteredBrands = ({ searchTerm, brands }) => {
+    if(brands == null) {
+      return null
+    }
     return brands.filter(brand => {
       return brand.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       brand.description.toLowerCase().includes(searchTerm.toLowerCase());
@@ -59,7 +63,7 @@ class App extends Component {
     
     const {loadingBrands, searchTerm} = this.state;
 
-    console.log('BRANDS:', this.state.brands)
+    console.log('BRANDS in RENDER:', this.state.brands)
 
     return (
       <Container >
