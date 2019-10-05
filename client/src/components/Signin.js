@@ -86,7 +86,7 @@ class Signin extends React.Component {
               direction="column"
               alignItems="center"
             >
-              <Heading color="midnight">Welcome Back!</Heading>
+              <Heading color="midnight">Please log in</Heading>
             </Box>
             {/* Username Input */}
             <TextField

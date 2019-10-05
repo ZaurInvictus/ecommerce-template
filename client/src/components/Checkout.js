@@ -51,7 +51,7 @@ class _CheckoutForm extends React.Component {
       city,
       address,
       postalCode,
-      // confirmationEmailAddress
+      confirmationEmailAddress
     } = this.state;
 
     const amount = calculateAmount(cartItems);
@@ -73,17 +73,15 @@ class _CheckoutForm extends React.Component {
         token
       });
 
-
-      // PAYMENT CONFIRMATION EMAIL, OPTIONAL
-      // await strapi.request("POST", "/email", {
-      //   data: {
-      //     to: confirmationEmailAddress,
-      //     subject: `Order Confirmation - BrewHaha ${new Date(Date.now())}`,
-      //     text: "Your order has been processed",
-      //     html: "<bold>Expect your order to arrive in 2-3 shipping days</bold>"
-      //   }
-      // });
-
+      // PAYMENT CONFIRMATION EMAIL (OPTIONAL)
+      await strapi.request("POST", "/email", {
+        data: {
+          to: confirmationEmailAddress,
+          subject: `Order Confirmation - Online Store ${new Date(Date.now())}`,
+          text: "Your order has been processed",
+          html: "<bold>Expect your order to arrive in 2-3 business days</bold>"
+        }
+      });
 
       // Set order processing to false & hide the modal 
       this.setState({ orderProcessing: false, modal: false });
